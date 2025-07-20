@@ -1,0 +1,25 @@
+name: Lint Commit Messages
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate-commits:
+    name: Validate Commits
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Check with Commitizen
+        run: |
+          poetry run invoke c.check --rev-range origin/${{ github.base_ref || 'main' }}..HEAD

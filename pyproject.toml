@@ -1,0 +1,58 @@
+[project]
+name = "ledgerly"
+version = "0.1.0"
+description = "A personal finance application"
+authors = [
+    {name = "truthless-dev", email = "truthless.deviant248@simplelogin.fr"}
+]
+readme = "README.rst"
+license = "MIT"
+requires-python = "^3.12"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+click = "^8.2.1"
+
+[tool.poetry.group.dev.dependencies]
+black = "^25.1.0"
+commitizen = "^4.8.2"
+invoke = "^2.2.0"
+isort = "^6.0.1"
+flake8 = "^7.2.0"
+pre-commit = "^4.2.0"
+pytest = "^8.4.1"
+sphinx = "^8.2.3"
+sphinx-autoapi = "^3.6.0"
+sphinx-click = "^6.0.0"
+
+[tool.isort]
+profile = "black"
+atomic = true
+honor_noqa = true
+include_trailing_comma = true
+line_length = 88
+lines_after_imports = 2
+multi_line_output = 1
+only_modified = true
+remove_redundant_aliases = true
+skip_gitignore = true
+split_on_trailing_comma = true
+star_first = true
+use_parentheses = true
+
+[tool.commitizen]
+annotated_tags = true
+changelog_file = "docs/changelog.rst"
+major_version_zero = true
+tag_format = "v$version"
+template = "CHANGELOG.rst.j2"
+update_changelog_on_bump = true
+version = "0.1.0"
+version_files = ["pyproject.toml:version"]
+
+[tool.poetry.scripts]
+ledgerly = "ledgerly.cli.main:cli"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

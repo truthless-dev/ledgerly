@@ -1,0 +1,22 @@
+name: Build HTML Docs
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docs:
+    name: Build Docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version-file: '.python-version'
+      - name: Install dependencies
+        run: |
+          pip install poetry
+          poetry install
+      - name: Build HTML docs
+        run: poetry run invoke doc.html
